@@ -63,6 +63,9 @@ Create a personal portfolio website to showcase your skills and projects.
 <p align="center">
   <img src="https://raw.githubusercontent.com/jatinrana331gm/Portfolio-js/main/screenshots/5.png?raw=true" style="width:100%;" />
 </p>
+<p align="center">
+  <img src="https://raw.githubusercontent.com/jatinrana331gm/Portfolio-js/main/screenshots/6.png?raw=true" style="width:100%;" />
+</p>
 
 ---
 
