@@ -49,23 +49,16 @@ Create a personal portfolio website to showcase your skills and projects.
 ## 📷 Screenshots
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/jatinrana331gm/Portfolio-js/main/screenshots/1.png?raw=true" style="width:100%;" />
+  <img src="https://raw.githubusercontent.com/jatinrana331gm/Portfolio-js/main/screenshots/1.jpg?raw=true" width="300" />
+  <img src="https://raw.githubusercontent.com/jatinrana331gm/Portfolio-js/main/screenshots/2.jpg?raw=true" width="300" />
+  <img src="https://raw.githubusercontent.com/jatinrana331gm/Portfolio-js/main/screenshots/3.jpg?raw=true" width="300" />
 </p>
 <p align="center">
-  <img src="https://raw.githubusercontent.com/jatinrana331gm/Portfolio-js/main/screenshots/2.png?raw=true" style="width:100%;" />
+  <img src="https://raw.githubusercontent.com/jatinrana331gm/Portfolio-js/main/screenshots/4.jpg?raw=true" width="300" />
+  <img src="https://raw.githubusercontent.com/jatinrana331gm/Portfolio-js/main/screenshots/5.jpg?raw=true" width="300" />
+  <img src="https://raw.githubusercontent.com/jatinrana331gm/Portfolio-js/main/screenshots/6.jpg?raw=true" width="300" />
 </p>
-<p align="center">
-  <img src="https://raw.githubusercontent.com/jatinrana331gm/Portfolio-js/main/screenshots/3.png?raw=true" style="width:100%;" />
-</p>
-<p align="center">
-  <img src="https://raw.githubusercontent.com/jatinrana331gm/Portfolio-js/main/screenshots/4.png?raw=true" style="width:100%;" />
-</p>
-<p align="center">
-  <img src="https://raw.githubusercontent.com/jatinrana331gm/Portfolio-js/main/screenshots/5.png?raw=true" style="width:100%;" />
-</p>
-<p align="center">
-  <img src="https://raw.githubusercontent.com/jatinrana331gm/Portfolio-js/main/screenshots/6.png?raw=true" style="width:100%;" />
-</p>
+
 
 ---
 
