@@ -31,9 +31,9 @@ var typed1 = new Typed('#element1', {
 const menuToggle = document.getElementById('menu-toggle');
 const siteNav = document.querySelector('.site-nav');
 
-menuToggle.addEventListener('click', function() {
+menuToggle.addEventListener('click', function () {
   siteNav.classList.toggle('active');
-  
+
   // Animate hamburger icon
   if (siteNav.classList.contains('active')) {
     menuToggle.classList.add('bx-x');
@@ -71,18 +71,18 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 window.addEventListener('scroll', () => {
   const sections = document.querySelectorAll('section');
   const navLinks = document.querySelectorAll('.site-nav a');
-  
+
   let current = '';
-  
+
   sections.forEach(section => {
     const sectionTop = section.offsetTop;
     const sectionHeight = section.clientHeight;
-    
+
     if (scrollY >= (sectionTop - 200)) {
       current = section.getAttribute('id');
     }
   });
-  
+
   navLinks.forEach(link => {
     link.classList.remove('active');
     if (link.getAttribute('href') === `#${current}`) {
@@ -121,7 +121,7 @@ const observer = new IntersectionObserver((entries) => {
 // Observe elements for animation
 document.addEventListener('DOMContentLoaded', () => {
   const animateElements = document.querySelectorAll('.skill-item, .project-card');
-  
+
   animateElements.forEach(el => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(30px)';
@@ -133,13 +133,13 @@ document.addEventListener('DOMContentLoaded', () => {
 // Form submission handling
 const contactForm = document.querySelector('.contact-section form');
 if (contactForm) {
-  contactForm.addEventListener('submit', function(e) {
+  contactForm.addEventListener('submit', function (e) {
     const button = this.querySelector('button[type="submit"]');
     const originalText = button.textContent;
-    
+
     button.textContent = 'Sending...';
     button.disabled = true;
-    
+
     // Reset button after 3 seconds (form will redirect via Formspree)
     setTimeout(() => {
       button.textContent = originalText;
@@ -152,7 +152,7 @@ if (contactForm) {
 window.addEventListener('scroll', () => {
   const scrolled = window.pageYOffset;
   const parallaxElements = document.querySelectorAll('.intro-image img');
-  
+
   parallaxElements.forEach(element => {
     const speed = 0.5;
     element.style.transform = `translateY(${scrolled * speed}px)`;
@@ -161,32 +161,32 @@ window.addEventListener('scroll', () => {
 
 // Skills hover effect enhancement
 document.querySelectorAll('.skill-item').forEach(item => {
-  item.addEventListener('mouseenter', function() {
+  item.addEventListener('mouseenter', function () {
     this.style.transform = 'translateY(-15px) scale(1.05)';
   });
-  
-  item.addEventListener('mouseleave', function() {
+
+  item.addEventListener('mouseleave', function () {
     this.style.transform = 'translateY(0) scale(1)';
   });
 });
 
 // Project card tilt effect
 document.querySelectorAll('.project-card').forEach(card => {
-  card.addEventListener('mousemove', function(e) {
+  card.addEventListener('mousemove', function (e) {
     const rect = this.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
-    
+
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
-    
+
     const rotateX = (y - centerY) / 10;
     const rotateY = (centerX - x) / 10;
-    
+
     this.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-10px)`;
   });
-  
-  card.addEventListener('mouseleave', function() {
+
+  card.addEventListener('mouseleave', function () {
     this.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
   });
 });
@@ -230,80 +230,77 @@ if (window.history.replaceState) {
 // ==============================
 
 async function loadGitHubProjects() {
-
   const username = "jatinrana331gm";
-
   const projectsContainer = document.querySelector(".projects-container");
 
+  // Used images ko track karne ke liye
+  const usedImages = new Set();
+
+  // Professional Tech Images ki list
+  const techImages = [
+    "https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "https://images.pexels.com/photos/574071/pexels-photo-574071.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "https://images.pexels.com/photos/2599244/pexels-photo-2599244.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "https://images.pexels.com/photos/1779487/pexels-photo-1779487.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "https://images.pexels.com/photos/3861932/pexels-photo-3861932.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "https://images.pexels.com/photos/1181263/pexels-photo-1181263.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "https://images.pexels.com/photos/4974912/pexels-photo-4974912.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "https://images.pexels.com/photos/2004161/pexels-photo-2004161.jpeg?auto=compress&cs=tinysrgb&w=600"
+  ];
+
   try {
-
-    const response = await fetch(
-      `https://api.github.com/users/${username}/repos`
-    );
-
+    const response = await fetch(`https://api.github.com/users/${username}/repos?sort=updated`);
     const repos = await response.json();
 
-    repos.forEach(repo => {
-
-      // Fork repos skip
+    repos.reverse().forEach((repo, index) => {
       if (repo.fork) return;
 
-      // Card Create
       const projectCard = document.createElement("div");
-
       projectCard.classList.add("project-card");
 
+      // Unique Image Selection Logic
+      let finalImageUrl = "";
+      for (let img of techImages) {
+        if (!usedImages.has(img)) {
+          finalImageUrl = img;
+          usedImages.add(img);
+          break;
+        }
+      }
+
+      // Agar list khatam ho jaye toh random Picsum seed use karein
+      if (!finalImageUrl) {
+        finalImageUrl = `https://picsum.photos/seed/${repo.id}/600/400`;
+      }
+
       projectCard.innerHTML = `
-      
-        <img 
-          src="https://opengraph.githubassets.com/1/${username}/${repo.name}" 
-          alt="${repo.name}"
-        >
-
-        <h3>${repo.name}</h3>
-
-        <p>
-          ${repo.description || "No description added yet."}
-        </p>
-
-        <div class="project-links">
-
-          ${
-            repo.homepage
-            ? `
-              <a 
-                class="btn2"
-                href="${repo.homepage}"
-                target="_blank"
-              >
-                Visit Site ↗
-              </a>
-            `
-            : ""
-          }
-
-          <a
-            class="btn2 github-btn"
-            href="${repo.html_url}"
-            target="_blank"
-          >
-            GitHub ↗
-          </a>
-
+        <div class="project-img-wrapper" style="overflow: hidden; border-radius: 10px 10px 0 0;">
+            <img 
+              src="${finalImageUrl}" 
+              alt="${repo.name}"
+              style="width: 100%; height: 220px; object-fit: cover; filter: brightness(0.7);"
+            >
+        </div>
+        <div class="project-info" style="padding: 20px;">
+            <h3 style="color: #00d2ff; margin-bottom: 10px;">${repo.name.replace(/-/g, ' ')}</h3>
+            <p style="color: #ccc; font-size: 0.9rem; line-height: 1.5; min-height: 45px;">
+              ${repo.description || "Robust QA Automation and software development solution."}
+            </p>
+            <div class="project-links" style="margin-top: 15px;">
+              ${repo.homepage ? `<a class="btn2" href="${repo.homepage}" target="_blank">Live Demo ↗</a>` : ""}
+              <a class="btn2 github-btn" href="${repo.html_url}" target="_blank">View Code ↗</a>
+            </div>
         </div>
       `;
 
-      projectsContainer.appendChild(projectCard);
-
+      projectsContainer.prepend(projectCard);
     });
 
   } catch (error) {
-
     console.log("GitHub API Error:", error);
-
   }
-
 }
 
-// Run Function
 loadGitHubProjects();
