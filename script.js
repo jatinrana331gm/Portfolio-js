@@ -2,9 +2,9 @@
 var typed = new Typed('#element', {
   strings: [
     'Welcome to My Portfolio!',
-    'I\'m Jatin, a Web Developer who loves clean code and making websites look pixel-perfect.',
-    'I believe in working with patience and diligence when I have to code with JavaScript.',
-    'Explore, click around, and let\'s build something awesome together!'
+    'I am a QA Automation Engineer passionate about software testing.',
+    'Skilled in Selenium WebDriver, Java, TestNG, Maven, SQL, and API Testing.',
+    'I build scalable automation frameworks for modern web applications.'
   ],
   typeSpeed: 50,
   loop: true,
@@ -14,12 +14,18 @@ var typed = new Typed('#element', {
 });
 
 var typed1 = new Typed('#element1', {
-  strings: ['Web Developer', 'Frontend Developer', 'UI/UX Enthusiast', 'Problem Solver'],
+  strings: [
+    'QA Engineer',
+    'QA Automation Engineer',
+    'Selenium Automation Tester',
+    'Software Test Engineer'
+  ],
   typeSpeed: 100,
   loop: true,
   backSpeed: 50,
   backDelay: 1500,
 });
+
 
 // Mobile menu toggle
 const menuToggle = document.getElementById('menu-toggle');
@@ -194,3 +200,110 @@ window.addEventListener('load', () => {
 if (window.history.replaceState) {
   window.history.replaceState(null, null, window.location.href);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ==============================
+// AUTO LOAD GITHUB PROJECTS
+// ==============================
+
+async function loadGitHubProjects() {
+
+  const username = "jatinrana331gm";
+
+  const projectsContainer = document.querySelector(".projects-container");
+
+  try {
+
+    const response = await fetch(
+      `https://api.github.com/users/${username}/repos`
+    );
+
+    const repos = await response.json();
+
+    repos.forEach(repo => {
+
+      // Fork repos skip
+      if (repo.fork) return;
+
+      // Card Create
+      const projectCard = document.createElement("div");
+
+      projectCard.classList.add("project-card");
+
+      projectCard.innerHTML = `
+      
+        <img 
+          src="https://opengraph.githubassets.com/1/${username}/${repo.name}" 
+          alt="${repo.name}"
+        >
+
+        <h3>${repo.name}</h3>
+
+        <p>
+          ${repo.description || "No description added yet."}
+        </p>
+
+        <div class="project-links">
+
+          ${
+            repo.homepage
+            ? `
+              <a 
+                class="btn2"
+                href="${repo.homepage}"
+                target="_blank"
+              >
+                Visit Site ↗
+              </a>
+            `
+            : ""
+          }
+
+          <a
+            class="btn2 github-btn"
+            href="${repo.html_url}"
+            target="_blank"
+          >
+            GitHub ↗
+          </a>
+
+        </div>
+      `;
+
+      projectsContainer.appendChild(projectCard);
+
+    });
+
+  } catch (error) {
+
+    console.log("GitHub API Error:", error);
+
+  }
+
+}
+
+// Run Function
+loadGitHubProjects();
